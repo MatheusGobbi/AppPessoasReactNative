@@ -3,14 +3,14 @@ import { View, Text, StyleSheet } from 'react-native';
 
 
 const Header = (props) => (
- <View style={Style.container}>
-     <Text style={Style.title}>{props.title}</Text>
- </View>
+    <View style={Style.container}>
+        <Text style={Style.title}>{props.title}</Text>
+    </View>
 
 );
 
 
-const Style = StyleSheet.create ({
+const Style = StyleSheet.create({
     container: {
         marginTop: 25,
         backgroundColor: '#4B0082',
@@ -19,7 +19,7 @@ const Style = StyleSheet.create ({
         justifyContent: 'center',
     },
     title: {
-        fontSize:50,
+        fontSize: 50,
         color: '#fff',
     }
 });

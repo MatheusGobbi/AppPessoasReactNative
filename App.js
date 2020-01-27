@@ -1,41 +1,47 @@
-import React from 'react';
-import {  Text, View, Alert } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import Header from './src/components/Header';
-import PeopleList from './src/components/PeopleList';
+import PeoplePage from './src/pages/PeoplePage';
+import PeopleDetailPage from './src/pages/PeopleDetailPage'
 
-import axios from 'axios';
-
-
-export default class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    peoples: []
-    };
+const AppNavigator = createStackNavigator({
+  'Main': {
+    screen: PeoplePage
+  },
+  'PeopleDetail': {
+    screen: PeopleDetailPage,
+    navigationOptions: ( { navigation } ) => {
+      const peopleName = navigation.state.params.people.name.first;
+      return ({
+        title: peopleName,
+        headerTitleStyle: {
+          color: '#fff',
+          fontSize: 30,
+        }
+      });
+    }
   }
+}, {
+  defaultNavigationOptions: {
+    title: 'Pessoas',
+    headerTintColor: '#fff',
 
-  componentDidMount() {
-  axios
-       .get('https://randomuser.me/api/?nat=br&results=6')
-       .then(response => {
-           const {results} = response.data;
-           this.setState({
-              peoples: results
-           });})
-      .catch(erro => Alert.alert('Error da promise'))
+    headerStyle: {
+      backgroundColor: '#1E90FF',
+      borderBottomWidth: 1,
+      borderBottomColor: '#C5C5C5'
+    },
+    headerTitleStyle: {
+      color: '#fff',
+      fontSize: 30,
 
-
-
+      flexGrow: 1,
+      textAlign: 'center',
+    }
   }
-  render() {
-     return (
-      <View>
-          <Header title="Pessoas!" />
-         <PeopleList peoples={this.state.peoples} />
-      </View>
-    );
-  }
-}
+});
+
+const AppContainer = createAppContainer(AppNavigator);
+
+
+export default AppContainer;
