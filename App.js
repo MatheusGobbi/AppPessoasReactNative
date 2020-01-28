@@ -6,17 +6,17 @@ import PeopleDetailPage from './src/pages/PeopleDetailPage'
 
 const AppNavigator = createStackNavigator({
   'Main': {
-    screen: PeoplePage
+      screen: PeoplePage
   },
   'PeopleDetail': {
-    screen: PeopleDetailPage,
-    navigationOptions: ( { navigation } ) => {
-      const peopleName = navigation.state.params.people.name.first;
-      return ({
-        title: peopleName,
-        headerTitleStyle: {
-          color: '#fff',
-          fontSize: 30,
+      screen: PeopleDetailPage,
+      navigationOptions: ({ navigation }) => {
+          const peopleName = navigation.state.params.people.name.first;
+        return ({
+           title: peopleName,
+           headerTitleStyle: {
+           color: '#fff',
+           fontSize: 30,
         }
       });
     }
